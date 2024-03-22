@@ -7,6 +7,7 @@ on:
 env:
   AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
   ECR_REPOSITORY: monitoring_app          # set this to your Amazon ECR repository name
+  EKS_CLUSTER_NAME: monitor_cluster
 
 jobs:
 
@@ -41,10 +42,6 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:latest" >> $GITHUB_OUTPUT
-
-
-    - name: Pull Docker image
-      run: docker pull $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
     - name: Update kube config
       run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
