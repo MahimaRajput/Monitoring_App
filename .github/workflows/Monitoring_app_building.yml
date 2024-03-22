@@ -43,8 +43,6 @@ jobs:
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:latest" >> $GITHUB_OUTPUT
 
 
-    - name: Pull Docker image
-      run: docker pull your-registry.example.com/your-image:latest
 
     - name: Update kube config
       run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
