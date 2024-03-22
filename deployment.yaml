@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-monitoring-app
+  template:
+    metadata:
+      labels:
+        app: my-monitoring-app
+    spec:
+      containers:
+      - name: monitoring_app
+        image:  $ECR_REGISTRY/$ECR_REPOSITORY:latest # Specify your Docker image
+        ports:
+        - containerPort: 80
