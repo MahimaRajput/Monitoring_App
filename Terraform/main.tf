@@ -13,7 +13,7 @@ resource "aws_eks_cluster" "monitor_cluster" {
   role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
-    subnet_ids         = ["subnet-08d94184c2fa09560"]  # Add your subnet IDs
+    subnet_ids         = ["subnet-08d94184c2fa09560","subnet-04b61e191e0889e38"]  # Add your subnet IDs
     security_group_ids = ["sg-0050636b4e8b08d56"]                         # Add your security group ID
   }
 }
