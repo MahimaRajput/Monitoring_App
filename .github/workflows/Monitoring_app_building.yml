@@ -6,7 +6,7 @@ on:
 
 env:
   AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: monitoring_app          # set this to your Amazon ECR repository name4
+  ECR_REPOSITORY: monitoring-app          # set this to your Amazon ECR repository name4
   EKS_CLUSTER_NAME: monitor_cluster
 
 jobs:
@@ -34,8 +34,8 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        IMAGE_TAG: ${{ github.sha }}
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}        
+        IMAGE_TAG: ${{ steps.commit.outputs.short }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
