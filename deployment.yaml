@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+  name: my-monitoring-app
 spec:
   replicas: 1
   selector:
@@ -13,7 +13,8 @@ spec:
         app: my-monitoring-app
     spec:
       containers:
-      - name: monitoring_app
+      - name: my-monitoring_app
         image: DOCKER_IMAGE # Specify your Docker image
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
