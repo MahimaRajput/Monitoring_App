@@ -6,7 +6,8 @@ on:
 
 env:
   AWS_REGION: us-east-1                   # set this to your preferred AWS region, e.g. us-west-1
-  ECR_REPOSITORY: monitoring_app          # set this to your Amazon ECR repository name
+  ECR_REPOSITORY: monitoring_app          # set this to your Amazon ECR repository name4
+  EKS_CLUSTER_NAME: monitor_cluster
 
 jobs:
 
@@ -42,14 +43,14 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
         echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:latest" >> $GITHUB_OUTPUT
 
-
-
     - name: Update kube config
       run: aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_REGION
 
-    - name: Apply Kubernetes manifests
-      run: kubectl apply -f ./Monitoring app/deployment.yaml
-
-    - name: Verify deployment
-      run: kubectl get pods
+    - name: Deploy to EKS
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}        
+        IMAGE_TAG: ${{ steps.commit.outputs.short }}
+      run: |
+        sed -i.bak "s|DOCKER_IMAGE|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" deployment.yaml && \
+        kubectl apply -f deployment.yaml
 
