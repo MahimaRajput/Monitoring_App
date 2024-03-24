@@ -9,6 +9,8 @@ env:
   aks_cluster_name: monitoring_app_aks
 
 jobs:
+  permissions:
+    id-token: write
 
   deploy:
     name: Deploy
