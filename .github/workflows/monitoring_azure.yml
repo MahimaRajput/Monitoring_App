@@ -62,10 +62,8 @@ jobs:
 
     - name: Update Kubernetes Manifest with Docker Image
       run: |
-        sed -i "s|DOCKER_IMAGE|monitoringappeus.azurecr.io/mon_app:latest|g" manifests/deployment.yaml
-
-    - name: Deploy to AKS
-      run: kubectl apply -f manifests/deployment.yaml && \ 
+        sed -i "s|DOCKER_IMAGE|monitoringappeus.azurecr.io/mon_app:latest|g" manifests/deployment.yaml && \
+        kubectl apply -f manifests/deployment.yaml 
         kubectl apply -f manifests/service.yaml
 
     - name: Set up Helm
