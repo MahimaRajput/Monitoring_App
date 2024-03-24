@@ -47,10 +47,9 @@ jobs:
 
       # Logs in with your Azure credentials
     - name: Azure login
-      uses: azure/login@v1.4.6
+      uses: azure/login@v2
       with:
         client-id: ${{ secrets.CLIENT_ID }}
-        client-secret: ${{ secrets.CLIENT_SECRET }}
         tenant-id: ${{ secrets.TENANT_ID }}
         subscription-id: ${{ secrets.SUBS_ID }}
 
@@ -63,3 +62,4 @@ jobs:
 
     - name: Deploy to AKS
       run: kubectl apply -f manifests/deployment.yaml
+
