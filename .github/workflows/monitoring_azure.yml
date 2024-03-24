@@ -9,8 +9,11 @@ env:
   aks_cluster_name: monitoring_app_aks
 
 jobs:
-  permissions:
-    id-token: write
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
 
     steps:
     - name: Checkout
@@ -37,8 +40,7 @@ jobs:
         curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
         AZ_REPO=$(lsb_release -cs)
         echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
-        sudo apt-get update          
-        sudo apt-get install azure-cli
+        sudo apt-get update          sudo apt-get install azure-cli
 
       # Logs in with your Azure credentials
     - name: Azure login
