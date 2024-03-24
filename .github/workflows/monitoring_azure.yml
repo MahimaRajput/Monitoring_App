@@ -52,6 +52,7 @@ jobs:
         client-id: ${{ secrets.CLIENT_ID }}
         tenant-id: ${{ secrets.TENANT_ID }}
         subscription-id: ${{ secrets.SUBS_ID }}
+      allow-no-subscriptions: true
 
     - name: Configure Kubernetes context
       run: az aks get-credentials --resource-group $resource_group_name --name $aks_cluster_name
