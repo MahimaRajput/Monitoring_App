@@ -64,4 +64,3 @@ jobs:
     - name: Deploy to AKS
       run: kubectl apply -f manifests/deployment.yaml
 
-
