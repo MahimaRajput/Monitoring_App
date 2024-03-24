@@ -54,6 +54,9 @@ jobs:
         tenant-id: ${{ secrets.TENANT_ID }}
       continue-on-error: true
       
+    - name: Authenticate Azure CLI
+      run: az login
+
     - name: Configure Kubernetes context
       run: az aks get-credentials --resource-group $resource_group_name --name $aks_cluster_name
 
