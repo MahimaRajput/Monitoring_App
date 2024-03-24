@@ -8,10 +8,10 @@ env:
   resource_group_name: monitoring_app
   aks_cluster_name: monitoring_app_aks
 
-jobs:
-  permissions:
-    id-token: write
+permissions:
+  id-token: write
 
+jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
