@@ -9,10 +9,9 @@ env:
   aks_cluster_name: monitoring_app_aks
 
 jobs:
-  my-job:
-    permissions:
-      id-token: write
-      
+  permissions:
+    id-token: write
+
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
