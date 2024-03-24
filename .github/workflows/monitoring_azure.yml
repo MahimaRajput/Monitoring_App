@@ -8,6 +8,8 @@ env:
   resource_group_name: monitoring_app
   aks_cluster_name: monitoring_app_aks
 
+permissions:
+  id-token: write
 
 jobs:
   deploy:
