@@ -78,6 +78,5 @@ jobs:
 
     - name: Deploy Nginx with Helm
       run: |
-        helm install my-nginx nginx-stable/nginx-ingress --wait
-      
-
+        helm install ingress-nginx nginx-stable/nginx-ingress --wait
+    
